@@ -9,7 +9,9 @@ using System.Net;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Reflection.Emit;
+using System.Net.Http.Headers;
 using Newtonsoft.Json;
+using System.Net.Http;
 
 namespace FebAssess
 {
@@ -402,21 +404,27 @@ namespace FebAssess
         static string appKey = "50fa241eb8b5b6dd0d0f186ee7a347a0";
         static void Main(string[] args)
         {
-            WebRequest request = WebRequest.Create("https://api.edamam.com/search?q=" + query + "&app_id=" +appId + "&app_key=" + appKey);
+            WebRequest request = WebRequest.Create("https://worldwide-recipes1.p.rapidapi.com/api/search?q=" + query);
+            request.Method = WebRequestMethods.Http.Get;
+            request.ContentType= "application/json; charset=utf-8";
+            request.Headers.Add("X-RapidAPI-Key", "bc31ab951fmsh6e3e0e5f02b3095p1aa63cjsn3af8c76deead");
+            request.Headers.Add("X-RapidAPI-Host", "worldwide-recipes1.p.rapidapi.com");
             string t;
-            WebResponse response = request.GetResponse();
-            using(StreamReader sr = new StreamReader(response.GetResponseStream()))
+            HttpWebResponse response =(HttpWebResponse) request.GetResponse();
+            using (StreamReader sr = new StreamReader(response.GetResponseStream()))
             {
                 t = sr.ReadToEnd();
             }
 
-            EDAMAM JSON = JsonConvert.DeserializeObject< EDAMAM>(t);
-
+            WorldwideRecipes wr = JsonConvert.DeserializeObject<WorldwideRecipes>(t);
             Console.ReadKey();
         }
 
-        
 
 
-    }
+
+
+
+
+        }
 }

@@ -35,3 +35,5 @@ C:\Users\user\Documents\GitHub\NEA-Prototype\FebAssess\FebAssess\obj\Debug\FebAs
 C:\Users\user\Documents\GitHub\NEA-Prototype\FebAssess\FebAssess\obj\Debug\FebAssess.csproj.CopyComplete
 C:\Users\user\Documents\GitHub\NEA-Prototype\FebAssess\FebAssess\obj\Debug\FebAssess.exe
 C:\Users\user\Documents\GitHub\NEA-Prototype\FebAssess\FebAssess\obj\Debug\FebAssess.pdb
+C:\Users\user\Documents\GitHub\NEA-Prototype\FebAssess\FebAssess\bin\Debug\RestSharp.dll
+C:\Users\user\Documents\GitHub\NEA-Prototype\FebAssess\FebAssess\bin\Debug\RestSharp.xml
