@@ -76,7 +76,7 @@ namespace FebAssess
     }
     public class searchResult
     {
-        public double score { get; set; }
+        public double? score { get; set; }
     }
     public class display
     {
@@ -122,7 +122,7 @@ namespace FebAssess
     {
         public string mobilesectionName { get; set; }
         public int totalReviewCount { get; set; }
-        public double averageRating { get; set; }
+        public double? averageRating { get; set; }
         public string sortBy { get; set; }
     }
     public class ingredientLines
@@ -136,7 +136,7 @@ namespace FebAssess
         public string ingredient { get; set; }
         public string id { get; set; }
         public string remainder { get; set; }
-        public double quantity { get; set; }
+        public double? quantity { get; set; }
         public string wholeLine { get; set; }
 
     }
@@ -153,13 +153,13 @@ namespace FebAssess
     public class imperial
     {
         public unit unit { get; set; }
-        public double quantity { get; set; }
+        public double? quantity { get; set; }
     }
 
     public class metric
     {
         public unit unit { get; set; }
-        public double quantity { get; set; }
+        public double? quantity { get; set; }
     }
     public class unit
     {

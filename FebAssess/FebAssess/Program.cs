@@ -17,7 +17,7 @@ namespace FebAssess
 {
     internal class Program
     {
-        class EDAMAM
+        public class EDAMAM
         {
             public string q { get; set; }
             public int from { get; set; }
@@ -29,17 +29,17 @@ namespace FebAssess
             public hits[] hits { get; set; }         
 
         }
-        class hits
+        public class hits
         {
             public recipe recipe { get; set; }
         }
-        class self
+        public class self
         {
             public string href { get; set; } 
             public string title { get; set; }
         }
 
-        class recipe
+        public class recipe
         {
             public string uri { get; set; }
             public string label { get; set; }
@@ -56,7 +56,7 @@ namespace FebAssess
             public ingredients[] ingredients { get; set; }
             public double calories { get; set; }
             public double totalC02Emissions { get; set; }
-            public double co2EmissionsClass { get; set; }
+            public string co2EmissionsClass { get; set; }
             public double weight { get; set; }
             public double totalTime { get; set; }
             public string[] cuisineType { get; set; }
@@ -67,7 +67,7 @@ namespace FebAssess
             public digest[] digests { get; set; }
             
         }
-        class digest
+        public class digest
         {
             public string label { get; set; }
             public string tag { get; set; }
@@ -79,7 +79,7 @@ namespace FebAssess
             public sub[] subs { get; set; }
 
         }
-        class sub
+        public class sub
         {
             public string label { get; set; }
             public string tag { get; set; }
@@ -91,7 +91,7 @@ namespace FebAssess
 
         }
 
-        class totalnut
+        public class totalnut
         {
             public energycalc ENERC_KCAL { get; set; }
             public fat FAT { get; set; }
@@ -124,7 +124,7 @@ namespace FebAssess
             public vitk1 VITK1 { get; set; }
             public water WATER { get; set; }
         }
-        class totaldaily
+       public class totaldaily
         {
             public energycalc ENERC_KCAL { get; set; }
             public fat FAT { get; set; }
@@ -158,201 +158,201 @@ namespace FebAssess
             public water WATER { get; set; }
         }
 
-        class energycalc
+       public class energycalc
         {
             public string label { get; set;}
             public double quantity { get; set; }
             public string unit { get; set; }
 
         }
-        class fat
+        public class fat
         {
             public string label { get; set; }
             public double quantity { get; set; }
             public string unit { get; set; }
         }
 
-        class fatr
+        public class fatr
         {
             public string label { get; set; }
             public double quantity { get; set; }
             public string unit { get; set; }
         }
-        class fams
+        public class fams
         {
             public string label { get; set; }
             public double quantity { get; set; }
             public string unit { get; set; }
         }
-        class Fapu
+        public class Fapu
         {
             public string label { get; set; }
             public double quantity { get; set; }
             public string unit { get; set; }
         }
-        class chocdf
+       public class chocdf
         {
             public string label { get; set; }
             public double quantity { get; set; }
             public string unit { get; set; }
         }
-        class chocdfnet
+       public class chocdfnet
         {
             public string label { get; set; }
             public double quantity { get; set; }
             public string unit { get; set; }
         }
-        class fitbtg
+        public class fitbtg
         {
             public string label { get; set; }
             public double quantity { get; set; }
             public string unit { get; set; }
         }
-        class sugar
+        public class sugar
         {
             public string label { get; set; }
             public double quantity { get; set; }
             public string unit { get; set; }
         }
-        class procnt
+        public class procnt
         {
             public string label { get; set; }
             public double quantity { get; set; }
             public string unit { get; set; }
         }
-        class chloe
+       public class chloe
         {
             public string label { get; set; }
             public double quantity { get; set; }
             public string unit { get; set; }
         }
-        class na
+        public class na
         {
             public string label { get; set; }
             public double quantity { get; set; }
             public string unit { get; set; }
         }
-        class ca
+        public class ca
         {
             public string label { get; set; }
             public double quantity { get; set; }
             public string unit { get; set; }
         }
-        class mg
+        public class mg
         {
             public string label { get; set; }
             public double quantity { get; set; }
             public string unit { get; set; }
         }
-        class k
+        public class k
         {
             public string label { get; set; }
             public double quantity { get; set; }
             public string unit { get; set; }
         }
-        class fe
+        public class fe
         {
             public string label { get; set; }
             public double quantity { get; set; }
             public string unit { get; set; }
         }
-        class zn
+        public class zn
         {
             public string label { get; set; }
             public double quantity { get; set; }
             public string unit { get; set; }
         }
-        class p
+        public class p
         {
             public string label { get; set; }
             public double quantity { get; set; }
             public string unit { get; set; }
         }
-        class vita_rae
+       public class vita_rae
         {
             public string label { get; set; }
             public double quantity { get; set; }
             public string unit { get; set; }
         }
-        class vitc
+        public class vitc
         {
             public string label { get; set; }
             public double quantity { get; set; }
             public string unit { get; set; }
         }
-        class thia
+        public class thia
         {
             public string label { get; set; }
             public double quantity { get; set; }
             public string unit { get; set; }
         }
-        class ribf
+        public class ribf
         {
             public string label { get; set; }
             public double quantity { get; set; }
             public string unit { get; set; }
         }
-        class nia
+        public class nia
         {
             public string label { get; set; }
             public double quantity { get; set; }
             public string unit { get; set; }
         }
-        class vitb6a
+       public class vitb6a
         {
             public string label { get; set; }
             public double quantity { get; set; }
             public string unit { get; set; }
         }
-        class foldfe
+        public class foldfe
         {
             public string label { get; set; }
             public double quantity { get; set; }
             public string unit { get; set; }
         }
-        class folfd
+        public class folfd
         {
             public string label { get; set; }
             public double quantity { get; set; }
             public string unit { get; set; }
         }
-        class folac
+       public class folac
         {
             public string label { get; set; }
             public double quantity { get; set; }
             public string unit { get; set; }
         }
-        class vitba12
+       public class vitba12
         {
             public string label { get; set; }
             public double quantity { get; set; }
             public string unit { get; set; }
         }
-        class vitd
+        public class vitd
         {
             public string label { get; set; }
             public double quantity { get; set; }
             public string unit { get; set; }
         }
-        class topcha
+       public class topcha
         {
             public string label { get; set; }
             public double quantity { get; set; }
             public string unit { get; set; }
         }
-        class vitk1
+       public class vitk1
         {
             public string label { get; set; }
             public double quantity { get; set; }
             public string unit { get; set; }
         }
-        class water
+       public class water
         {
             public string label { get; set; }
             public double quantity { get; set; }
             public string unit { get; set; }
         }
-        class ingredients
+        public class ingredients
         {
             public string text { get; set; }
             public double quantity { get; set; }
@@ -364,42 +364,42 @@ namespace FebAssess
             public string image { get; set; }
         }
 
-        class Images
+       public class Images
         {
             public thumbnail THUMBNAIL { get; set; }
             public small SMALL { get; set; }
             public regular REGULAR { get; set; }
         }
 
-        class thumbnail
+        public class thumbnail
         {
             public string url { get; set; }
             public int width { get; set; } 
             public int hieght { get; set; }
 
         }
-        class small
+        public class small
         {
             public string url { get; set; }
             public int width { get; set; }
             public int hieght { get; set; }
         }
-        class regular
+        public class regular
         {
             public string url { get; set; }
             public int width { get; set; }
             public int hieght { get; set; }
         }
-        class next
+       public class next
         {
             public string href { get; set; }
             public string title { get; set; }
         }
-        class links
+        public class links
         {
            public next next { get; set; }
         }
-        static string query = "pizza";
+        static string query = "egg";
         static string appId = "edfdc8f1";
         static string appKey = "50fa241eb8b5b6dd0d0f186ee7a347a0";
         static void Main(string[] args)
@@ -417,7 +417,35 @@ namespace FebAssess
             }
 
             WorldwideRecipes wr = JsonConvert.DeserializeObject<WorldwideRecipes>(t);
+            bool b = false;
+            while (!b)
+            {
+                EDAMAM[] e = edamamApi($"https://api.edamam.com/api/recipes/v2?type=public&q={query}&app_id={appId}&app_key={appKey}");
+            }
+
             Console.ReadKey();
+            
+        }
+
+        static EDAMAM edamamApi(string m)
+        {
+            WebRequest r = WebRequest.Create(m);
+            r.Method = WebRequestMethods.Http.Get;
+            r.ContentType = "application/json; charset=utf-8";
+            string l;
+            HttpWebResponse resp = r.GetResponse() as HttpWebResponse;
+            using(StreamReader sr = new StreamReader(resp.GetResponseStream()))
+            {
+                l = sr.ReadToEnd();
+            }
+           
+            EDAMAM e =JsonConvert.DeserializeObject<EDAMAM>(l);
+            if(e._links.next.href.Length > 0)
+            {
+                return new EDAMAM[] {e, };
+            }
+            return e;
+
         }
 
 
