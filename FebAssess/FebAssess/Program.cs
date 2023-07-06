@@ -417,17 +417,21 @@ namespace FebAssess
             }
 
             WorldwideRecipes wr = JsonConvert.DeserializeObject<WorldwideRecipes>(t);
+            EDAMAM e = null;
+            List<EDAMAM> list = new List<EDAMAM>();
+            string m = $"https://api.edamam.com/api/recipes/v2?type=public&q={query}&app_id={appId}&app_key={appKey}";
             bool b = false;
             while (!b)
             {
-                EDAMAM[] e = edamamApi($"https://api.edamam.com/api/recipes/v2?type=public&q={query}&app_id={appId}&app_key={appKey}");
+                b = edamamApi(ref m,e);
+                list.Add(e);
             }
 
             Console.ReadKey();
             
         }
 
-        static EDAMAM edamamApi(string m)
+        static bool edamamApi(ref string m,EDAMAM e)
         {
             WebRequest r = WebRequest.Create(m);
             r.Method = WebRequestMethods.Http.Get;
@@ -439,12 +443,15 @@ namespace FebAssess
                 l = sr.ReadToEnd();
             }
            
-            EDAMAM e =JsonConvert.DeserializeObject<EDAMAM>(l);
+            e =JsonConvert.DeserializeObject<EDAMAM>(l);
             if(e._links.next.href.Length > 0)
             {
-                return new EDAMAM[] {e, };
+                m = e._links.next.href;
+                 return false;
             }
-            return e;
+
+            return true;
+            
 
         }
 
