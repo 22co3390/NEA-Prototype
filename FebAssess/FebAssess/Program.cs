@@ -12,6 +12,8 @@ using System.Reflection.Emit;
 using System.Net.Http.Headers;
 using Newtonsoft.Json;
 using System.Net.Http;
+using System.Windows.Forms;
+using System.IO.Pipes;
 
 namespace FebAssess
 {
@@ -26,7 +28,7 @@ namespace FebAssess
             public int count { get; set; }
             public links _links { get; set; }
 
-            public hits[] hits { get; set; }         
+            public List<hits> hits { get; set; }         
 
         }
         public class hits
@@ -49,22 +51,22 @@ namespace FebAssess
             public string url { get; set; }
             public string shareas { get; set; }
             public double yield { get; set; }
-            public string[] dietlabels { get; set; }
-            public string[] healthlabels { get; set; }
-            public string[] cautions { get; set; }
-            public string[] ingredientlines { get; set; }
-            public ingredients[] ingredients { get; set; }
+            public List<string> dietlabels { get; set; }
+            public List<string> healthlabels { get; set; }
+            public List<string> cautions { get; set; }
+            public List<string> ingredientlines { get; set; }
+            public List<ingredients> ingredients { get; set; }
             public double calories { get; set; }
             public double totalC02Emissions { get; set; }
             public string co2EmissionsClass { get; set; }
             public double weight { get; set; }
             public double totalTime { get; set; }
-            public string[] cuisineType { get; set; }
-            public string[] mealType { get; set; }
-            public string[] dishType { get; set; }
+            public List<string> cuisineType { get; set; }
+            public List<string> mealType { get; set; }
+            public List<string> dishType { get; set; }
             public totalnut totalNutrients { get; set; }
             public totaldaily totaldaily { get; set; }
-            public digest[] digests { get; set; }
+            public List<digest> digests { get; set; }
             
         }
         public class digest
@@ -76,7 +78,7 @@ namespace FebAssess
             public bool hasRDI { get; set; }
             public double daily { get; set; }
             public string unit { get; set; }
-            public sub[] subs { get; set; }
+            public List<sub> subs { get; set; }
 
         }
         public class sub
@@ -404,52 +406,90 @@ namespace FebAssess
         static string appKey = "50fa241eb8b5b6dd0d0f186ee7a347a0";
         static void Main(string[] args)
         {
+            DateTime p = DateTime.Now;
+            new ManualResetEvent(false).WaitOne();
+            List<EDAMAM> list = null;
+            Task t = new Task(() => EDAPI(ref list));
+            t.Start();
+            WorldwideRecipes wr = Spoonacular();
+            while (!t.IsCompleted)
+            {
+                Console.Clear();
+                Console.WriteLine((DateTime.Now - p).TotalSeconds + "s");
+            }
+
+            Console.ReadKey();
+        }
+        static WorldwideRecipes Spoonacular()
+        {
             WebRequest request = WebRequest.Create("https://worldwide-recipes1.p.rapidapi.com/api/search?q=" + query);
             request.Method = WebRequestMethods.Http.Get;
-            request.ContentType= "application/json; charset=utf-8";
+            request.ContentType = "application/json; charset=utf-8";
             request.Headers.Add("X-RapidAPI-Key", "bc31ab951fmsh6e3e0e5f02b3095p1aa63cjsn3af8c76deead");
             request.Headers.Add("X-RapidAPI-Host", "worldwide-recipes1.p.rapidapi.com");
             string t;
-            HttpWebResponse response =(HttpWebResponse) request.GetResponse();
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
             using (StreamReader sr = new StreamReader(response.GetResponseStream()))
             {
                 t = sr.ReadToEnd();
             }
 
-            WorldwideRecipes wr = JsonConvert.DeserializeObject<WorldwideRecipes>(t);
+            return JsonConvert.DeserializeObject<WorldwideRecipes>(t);
+        }
+        static void EDAPI(ref List<EDAMAM> list)
+        {
             EDAMAM e = null;
-            List<EDAMAM> list = new List<EDAMAM>();
+            int num = 0;
+            
+            list = new List<EDAMAM>();
             string m = $"https://api.edamam.com/api/recipes/v2?type=public&q={query}&app_id={appId}&app_key={appKey}";
             bool b = false;
-            while (!b)
+            Task<bool>[] t = new Task<bool>[150];
+            while (!b && num <150)
             {
-                b = edamamApi(ref m,e);
-                list.Add(e);
+                e = null;
+                t[num] = Task.Run(() =>
+                {
+                     return edamamApi(ref m, ref e);
+                });
+                b = t[num].Result;
+                if ( e!= null)
+                {
+                    list.Add(e);
+                    num++;
+                }
             }
-
-            Console.ReadKey();
             
+            Task.WaitAll(t);
         }
 
-        static bool edamamApi(ref string m,EDAMAM e)
+        static bool edamamApi(ref string m,ref EDAMAM e)
         {
             WebRequest r = WebRequest.Create(m);
             r.Method = WebRequestMethods.Http.Get;
             r.ContentType = "application/json; charset=utf-8";
             string l;
-            HttpWebResponse resp = r.GetResponse() as HttpWebResponse;
-            using(StreamReader sr = new StreamReader(resp.GetResponseStream()))
+            try
             {
-                l = sr.ReadToEnd();
-            }
-           
-            e =JsonConvert.DeserializeObject<EDAMAM>(l);
-            if(e._links.next.href.Length > 0)
-            {
-                m = e._links.next.href;
-                 return false;
-            }
+                HttpWebResponse resp = r.GetResponse() as HttpWebResponse;
+                using (StreamReader sr = new StreamReader(resp.GetResponseStream()))
+                {
+                    l = sr.ReadToEnd();
+                }
 
+                e = JsonConvert.DeserializeObject<EDAMAM>(l);
+                if (e._links.next != null)
+                {
+                    m = e._links.next.href;
+                    return false;
+                }
+
+                
+            }
+            catch
+            {
+                
+            }
             return true;
             
 
